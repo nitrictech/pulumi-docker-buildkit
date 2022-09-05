@@ -1,0 +1,5 @@
+{
+  "resource": true,
+  "name": "docker-buildkit",
+  "server": "https://github.com/MaterializeInc/pulumi-docker-buildkit/releases/download/v0.1.17/"
+}
