@@ -33,12 +33,16 @@ to generate it:
                 return err
         }
 
-+       goFiles, err := gogen.GeneratePackage(toolDescription, ppkg)
-+       if err != nil {
-+               return fmt.Errorf("generating golang package: %v", err)
-+       }
-+       if err := writeFiles("/home/user/go/src/github.com/nitrictech/pulumi-docker-buildkit/sdk/v0.1.17/dockerbuildkit", goFiles); err != nil {
-+               return err
++       goDestPath := os.Getenv("BUILDKIT_GO_DEST")
++       if goDestPath != "" {
++               goFiles, err := gogen.GeneratePackage(toolDescription, ppkg)
++               if err != nil {
++                       return fmt.Errorf("generating golang package: %v", err)
++               }
++
++               if err := writeFiles(filepath.Join(goDestPath, "v"+version), goFiles); err != nil {
++                       return err
++               }
 +       }
 +
         return nil
